@@ -2,31 +2,41 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roblox Invite 🎮</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Roblox Invite</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
 body {
   min-height: 100vh;
-  width: 100vw;
   background: #ff79b0;
-  font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
+  font-family: 'Segoe UI', Arial, sans-serif;
   animation: bgShift 5s ease-in-out infinite alternate;
+  position: relative;
 }
 
 @keyframes bgShift {
   0%   { background-color: #ff79b0; }
-  33%  { background-color: #ff4da6; }
-  66%  { background-color: #ff99cc; }
-  100% { background-color: #ff6eb4; }
+  50%  { background-color: #ff4da6; }
+  100% { background-color: #ff99cc; }
 }
 
+/* Center wrapper — single column, single card */
+#wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sparks */
 #sparks {
   position: fixed;
   inset: 0;
@@ -34,13 +44,11 @@ body {
   z-index: 0;
   overflow: hidden;
 }
-
 .spark {
   position: absolute;
   border-radius: 50%;
   animation: rise linear infinite;
 }
-
 @keyframes rise {
   0%   { transform: translateY(0) scale(0.2); opacity: 0; }
   15%  { opacity: 1; }
@@ -48,31 +56,30 @@ body {
   100% { transform: translateY(-130px) scale(0.1); opacity: 0; }
 }
 
+/* Card */
 .card {
   position: relative;
   z-index: 10;
   background: rgba(255,255,255,0.93);
   border-radius: 30px;
-  padding: 45px 50px 40px;
+  padding: 40px 36px 36px;
   text-align: center;
   box-shadow: 0 10px 50px rgba(200,0,100,0.35), 0 0 0 4px rgba(255,110,180,0.5);
-  max-width: 460px;
-  width: 88vw;
+  width: min(420px, 90vw);
   animation: popIn 0.65s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 
 @keyframes popIn {
   from { transform: scale(0.4) rotate(-8deg); opacity: 0; }
-  to   { transform: scale(1)   rotate(0deg);  opacity: 1; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
 .icon {
-  font-size: 62px;
+  font-size: 58px;
   display: block;
   margin-bottom: 10px;
   animation: jump 1.3s ease-in-out infinite;
 }
-
 @keyframes jump {
   0%,100% { transform: translateY(0); }
   45%     { transform: translateY(-14px); }
@@ -80,7 +87,7 @@ body {
 }
 
 h1 {
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: #d6006a;
   line-height: 1.35;
@@ -88,31 +95,31 @@ h1 {
 }
 
 .sub {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: #b05580;
   font-weight: 700;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .btn-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  min-height: 60px;
+  gap: 16px;
+  min-height: 56px;
 }
 
 .btn-yes {
-  background: linear-gradient(135deg,#ff1a7a,#ff6eb4);
+  background: linear-gradient(135deg, #ff1a7a, #ff6eb4);
   color: #fff;
   border: none;
   border-radius: 50px;
-  padding: 13px 38px;
-  font-size: 1.15rem;
+  padding: 13px 36px;
+  font-size: 1.1rem;
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 5px 18px rgba(255,26,122,0.45);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s;
 }
 .btn-yes:hover  { transform: scale(1.08) translateY(-2px); }
 .btn-yes:active { transform: scale(0.96); }
@@ -122,8 +129,8 @@ h1 {
   color: #e0006e;
   border: 2.5px solid #ff6eb4;
   border-radius: 50px;
-  padding: 13px 30px;
-  font-size: 1.05rem;
+  padding: 13px 28px;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -141,68 +148,63 @@ h1 {
 #noBtn.angry {
   position: fixed;
   z-index: 999;
-  background: linear-gradient(135deg,#ff1a7a,#c7005c);
+  background: linear-gradient(135deg, #ff1a7a, #c7005c);
   color: #fff;
   border-color: transparent;
-  font-size: 0.8rem;
-  padding: 11px 16px;
+  font-size: 0.78rem;
+  padding: 11px 14px;
   border-radius: 14px;
   box-shadow: 0 6px 22px rgba(199,0,92,0.5);
-  animation: shake 0.25s ease-in-out infinite;
+  animation: shakebtn 0.25s ease-in-out infinite;
   pointer-events: none;
-  cursor: default;
 }
-
-@keyframes shake {
+@keyframes shakebtn {
   0%,100% { transform: rotate(-3deg) scale(1.05); }
   50%     { transform: rotate(3deg)  scale(1.05); }
 }
 
 .info {
   margin-top: 14px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: #c4628a;
   font-weight: 700;
   min-height: 20px;
 }
 
+/* Yes message */
 #yesMsg { display: none; }
 #yesMsg.show {
   display: block;
   animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
 }
-
 .big-emoji {
   font-size: 3rem;
   display: block;
   margin-bottom: 8px;
   animation: jump 1s ease-in-out infinite;
 }
-
 #yesMsg h2 {
-  font-size: 1.75rem;
+  font-size: 1.65rem;
   font-weight: 900;
   color: #d6006a;
   margin-bottom: 12px;
 }
-
 #yesMsg p {
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: #9a3060;
   font-weight: 600;
   line-height: 1.7;
 }
 
+/* Confetti */
 .conf {
   position: fixed;
   top: -15px;
-  border-radius: 3px;
   z-index: 200;
   animation: fall linear forwards;
 }
-
 @keyframes fall {
-  0%   { opacity: 1; transform: translateY(0)    rotate(0deg); }
+  0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
   100% { opacity: 0; transform: translateY(105vh) rotate(600deg); }
 }
 </style>
@@ -211,41 +213,44 @@ h1 {
 
 <div id="sparks"></div>
 
-<div class="card">
-  <div id="qSection">
-    <span class="icon">&#127918;</span>
-    <h1>Kya apko mere sath<br>Roblox khelna he? &#129394;</h1>
-    <p class="sub">Please please please!! &#127800;&#10024;</p>
-    <div class="btn-row" id="btnRow">
-      <button class="btn-yes" onclick="onYes()">Yes! &#127881;</button>
-      <button id="noBtn" onclick="onNo()">No &#128528;</button>
-    </div>
-    <p class="info" id="info"></p>
-  </div>
+<div id="wrapper">
+  <div class="card">
 
-  <div id="yesMsg">
-    <span class="big-emoji">&#127882;&#128150;&#127918;</span>
-    <h2>Thank you bbg!! &#128151;</h2>
-    <p>
-      Jaldi aao, apka wait kar rha hoon!! &#129392;&#10024;<br>
-      Roblox open karo abhi!! &#127918;&#127775;<br>
-      So excited!! &#129321;&#128171;&#127882;
-    </p>
+    <div id="qSection">
+      <span class="icon">&#127918;</span>
+      <h1>Kya apko mere sath<br>Roblox khelna he? &#129394;</h1>
+      <p class="sub">Please please please!! &#127800;&#10024;</p>
+      <div class="btn-row">
+        <button class="btn-yes" onclick="onYes()">Yes! &#127881;</button>
+        <button id="noBtn" onclick="onNo()">No &#128528;</button>
+      </div>
+      <p class="info" id="info"></p>
+    </div>
+
+    <div id="yesMsg">
+      <span class="big-emoji">&#127882;&#128150;&#127918;</span>
+      <h2>Thank you bbg!! &#128151;</h2>
+      <p>
+        Jaldi aao, apka wait kar rha hoon!! &#129392;&#10024;<br>
+        Roblox open karo abhi!! &#127918;&#127775;<br>
+        So excited!! &#129321;&#128171;&#127882;
+      </p>
+    </div>
+
   </div>
 </div>
 
 <script>
-(function() {
+(function () {
   // Sparks
   var sc = document.getElementById('sparks');
-  var cols = ['#ff6eb4','#ff1a7a','#ffb3d9','#ffe066','#ffffff','#ffd6ec','#ff99cc'];
+  var cols = ['#ff6eb4','#ff1a7a','#ffb3d9','#ffe066','#ffffff','#ffd6ec'];
   for (var i = 0; i < 45; i++) {
     var s = document.createElement('div');
     s.className = 'spark';
     var sz = (Math.random() * 10 + 4).toFixed(1);
     s.style.cssText =
-      'width:' + sz + 'px;' +
-      'height:' + sz + 'px;' +
+      'width:' + sz + 'px;height:' + sz + 'px;' +
       'left:' + (Math.random()*100).toFixed(1) + '%;' +
       'top:' + (Math.random()*100).toFixed(1) + '%;' +
       'background:' + cols[Math.floor(Math.random()*cols.length)] + ';' +
@@ -260,7 +265,7 @@ h1 {
   var noBtn    = document.getElementById('noBtn');
   var info     = document.getElementById('info');
 
-  window.onNo = function() {
+  window.onNo = function () {
     if (isAngry) return;
     noClicks++;
 
@@ -284,27 +289,20 @@ h1 {
 
     teleport();
 
-    var hints = [
-      '',
-      'Itna easy nahi hoga... 😏',
-      'Pakad ke dekho! 🏃',
-      'Zyada time mat lagao! 😂'
-    ];
+    var hints = ['', 'Itna easy nahi hoga... 😏', 'Pakad ke dekho! 🏃', 'Zyada time mat lagao! 😂'];
     info.textContent = hints[Math.min(noClicks, hints.length - 1)];
   };
 
   function teleport() {
-    var pad = 70;
+    var pad = 60;
     var bw  = noBtn.offsetWidth  || 110;
     var bh  = noBtn.offsetHeight || 46;
-    var maxX = window.innerWidth  - bw  - pad;
-    var maxY = window.innerHeight - bh  - pad;
-    var x = Math.random() * (maxX - pad) + pad;
-    var y = Math.random() * (maxY - pad) + pad;
+    var x = Math.random() * (window.innerWidth  - bw  - pad*2) + pad;
+    var y = Math.random() * (window.innerHeight - bh  - pad*2) + pad;
     noBtn.style.left = x + 'px';
     noBtn.style.top  = y + 'px';
     noBtn.style.transform = 'scale(1.35)';
-    setTimeout(function() { noBtn.style.transform = 'scale(1)'; }, 160);
+    setTimeout(function () { noBtn.style.transform = 'scale(1)'; }, 160);
   }
 
   function showAngry() {
@@ -312,11 +310,11 @@ h1 {
     noBtn.classList.remove('flying');
     noBtn.classList.add('angry');
     noBtn.textContent = 'Apki Pitti Ho jayegi ab jaldi yes dabao 😾';
-    noBtn.style.left = Math.max(10, (window.innerWidth/2 - 170)) + 'px';
+    noBtn.style.left = Math.max(8, (window.innerWidth/2 - 165)) + 'px';
     noBtn.style.top  = (window.innerHeight/2 + 50) + 'px';
     info.textContent = '⚠️ 5 second mein button wapas aayega...';
 
-    setTimeout(function() {
+    setTimeout(function () {
       noBtn.classList.remove('angry');
       noBtn.classList.add('flying');
       noBtn.textContent = 'No 😐';
@@ -326,7 +324,7 @@ h1 {
     }, 5000);
   }
 
-  window.onYes = function() {
+  window.onYes = function () {
     document.getElementById('qSection').style.display = 'none';
     noBtn.style.display = 'none';
     document.getElementById('yesMsg').classList.add('show');
@@ -335,9 +333,9 @@ h1 {
   };
 
   function doConfetti() {
-    var cc = ['#ff1a7a','#ffb3d9','#ffe066','#ff6eb4','#ffffff','#c7005c','#ffd6ec'];
+    var cc = ['#ff1a7a','#ffb3d9','#ffe066','#ff6eb4','#fff','#c7005c'];
     for (var i = 0; i < 90; i++) {
-      (function() {
+      (function () {
         var el = document.createElement('div');
         el.className = 'conf';
         el.style.cssText =
@@ -349,7 +347,7 @@ h1 {
           'animation-duration:' + (Math.random()*2+2).toFixed(1) + 's;' +
           'animation-delay:' + (Math.random()*1.5).toFixed(1) + 's;';
         document.body.appendChild(el);
-        setTimeout(function() { if(el.parentNode) el.parentNode.removeChild(el); }, 5000);
+        setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 5000);
       })();
     }
   }
